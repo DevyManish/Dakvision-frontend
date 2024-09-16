@@ -3,6 +3,7 @@ import Header from "@/components/header";
 import { Badge } from "@/components/ui/badge";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const page = () => {
   return (
@@ -34,6 +35,7 @@ const page = () => {
                   faster than ever.
                 </p>
               </div>
+              <Link href="/services/track">
               <div className="flex flex-col gap-2">
               <Image
                   src="https://i.postimg.cc/k4GtRcPq/service-2.png"
@@ -49,6 +51,7 @@ const page = () => {
                 Get real-time updates on your package’s status and location.
                 </p>
               </div>
+              </Link>
               <div className="flex flex-col gap-2">
               <Image
                   src="https://i.postimg.cc/8crJtzCY/service-3.png"

@@ -52,6 +52,7 @@ const page = () => {
                 </p>
               </div>
               </Link>
+              <Link href="/services/queue">
               <div className="flex flex-col gap-2">
               <Image
                   src="https://i.postimg.cc/8crJtzCY/service-3.png"
@@ -67,6 +68,7 @@ const page = () => {
                 Check the current queue status and reserve your place online.
                 </p>
               </div>
+              </Link>
               <div className="flex flex-col gap-2">
               <Image
                   src="https://i.postimg.cc/K87T6j5S/service-4.jpg"
@@ -82,6 +84,7 @@ const page = () => {
                 Learn about the best times to visit to avoid long waits.
                 </p>
               </div>
+              <Link href="/services/queue">
               <div className="flex flex-col gap-2">
               <Image
                   src="https://i.postimg.cc/xd0mnQsk/service-5.jpg"
@@ -97,6 +100,8 @@ const page = () => {
                 See which counters are free and which are busy.
                 </p>
               </div>
+              </Link>
+              <Link href="/services/chat">
               <div className="flex flex-col gap-2">
               <Image
                   src="https://i.postimg.cc/d1fZ2yJd/service-6.jpg"
@@ -112,6 +117,7 @@ const page = () => {
                 Get real-time assistance through our chat-based enquiry system.
                 </p>
               </div>
+              </Link>
             </div>
           </div>
         </div>

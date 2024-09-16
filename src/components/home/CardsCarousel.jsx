@@ -52,38 +52,32 @@ const data = [
   {
     category: "Dynamic Queue Management",
     title: "Efficiently Manage Queue Length and Waiting Times with CCTV and AI.",
-    src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "https://i.postimg.cc/jdW2svWF/card-1.jpg",
     content: <DummyContent />,
   },
   {
     category: "Real-Time Demand",
     title: "Monitor and Dynamically Allocate Counters Based on Real-time Live Data.",
-    src: "https://images.unsplash.com/photo-1531554694128-c4c6665f59c2?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "https://i.postimg.cc/HWNWP5S4/card-2.jpg",
     content: <DummyContent />,
   },
   {
     category: "User Experience Feedback",
     title: "Collect and Analyze Customer Feedback through Digital Surveys.",
-    src: "https://images.unsplash.com/photo-1713869791518-a770879e60dc?q=80&w=2333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "https://i.postimg.cc/NMfGZxqb/card-3.jpg",
     content: <DummyContent />,
   },
 
   {
     category: "Data Analytics",
     title: "Access Detailed Performance Metrics and Historical Data on Your Dashboard.",
-    src: "https://images.unsplash.com/photo-1599202860130-f600f4948364?q=80&w=2515&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "https://i.postimg.cc/NjcKpmMC/card-4.jpg",
     content: <DummyContent />,
   },
   {
     category: "AI Insights",
     title: "Utilize AI for Queue Analysis, Crowd Density Detection, and Idle Counter Alerts.",
-    src: "https://images.unsplash.com/photo-1602081957921-9137a5d6eaee?q=80&w=2793&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    content: <DummyContent />,
-  },
-  {
-    category: "Hiring",
-    title: "Hiring for a Staff Software Engineer",
-    src: "https://images.unsplash.com/photo-1511984804822-e16ba72f5848?q=80&w=2048&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "https://i.postimg.cc/02gjyDp5/card-5.jpg",
     content: <DummyContent />,
   },
 ];

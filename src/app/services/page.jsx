@@ -2,6 +2,7 @@
 import Header from "@/components/header";
 import { Badge } from "@/components/ui/badge";
 import React from "react";
+import Image from "next/image";
 
 const page = () => {
   return (
@@ -14,20 +15,19 @@ const page = () => {
               <div>
                 <Badge>Services</Badge>
               </div>
-              <div className="flex gap-2 flex-col">
-                <h2 className="text-3xl md:text-5xl tracking-tighter max-w-xl font-regular text-left">
-                  Something new!
-                </h2>
-                <p className="text-lg max-w-xl lg:max-w-lg leading-relaxed tracking-tight text-muted-foreground  text-left">
-                  Managing a small business today is already tough.
-                </p>
-              </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="flex flex-col gap-2">
-                <div className="bg-muted rounded-md aspect-video mb-2"></div>
+                {/* <div className="bg-orange-200 rounded-md aspect-video mb-2"></div> */}
+                <Image
+                  src="https://i.postimg.cc/tg2xgcfB/service-1.jpg"
+                  alt="sia"
+                  height="500"
+                  width="500"
+                  className="bg-muted rounded-md aspect-video mb-2 object-cover"
+                />
                 <h3 className="text-xl tracking-tight">
-                  Pay supplier invoices
+                  Service Information Access
                 </h3>
                 <p className="text-muted-foreground text-base">
                   Our goal is to streamline SMB trade, making it easier and
@@ -35,53 +35,78 @@ const page = () => {
                 </p>
               </div>
               <div className="flex flex-col gap-2">
-                <div className="bg-muted rounded-md aspect-video mb-2"></div>
+              <Image
+                  src="https://i.postimg.cc/k4GtRcPq/service-2.png"
+                  alt="sia"
+                  height="500"
+                  width="500"
+                  className="bg-muted rounded-md aspect-video mb-2 object-cover"
+                />
                 <h3 className="text-xl tracking-tight">
-                  Pay supplier invoices
+                Package Tracking
                 </h3>
                 <p className="text-muted-foreground text-base">
-                  Our goal is to streamline SMB trade, making it easier and
-                  faster than ever.
+                Get real-time updates on your package’s status and location.
                 </p>
               </div>
               <div className="flex flex-col gap-2">
-                <div className="bg-muted rounded-md aspect-video mb-2"></div>
+              <Image
+                  src="https://i.postimg.cc/8crJtzCY/service-3.png"
+                  alt="sia"
+                  height="500"
+                  width="500"
+                  className="bg-muted rounded-md aspect-video mb-2 object-cover"
+                />
                 <h3 className="text-xl tracking-tight">
-                  Pay supplier invoices
+                 Easy Queue 
                 </h3>
                 <p className="text-muted-foreground text-base">
-                  Our goal is to streamline SMB trade, making it easier and
-                  faster than ever.
+                Check the current queue status and reserve your place online.
                 </p>
               </div>
               <div className="flex flex-col gap-2">
-                <div className="bg-muted rounded-md aspect-video mb-2"></div>
+              <Image
+                  src="https://i.postimg.cc/K87T6j5S/service-4.jpg"
+                  alt="sia"
+                  height="500"
+                  width="500"
+                  className="bg-muted rounded-md aspect-video mb-2 object-cover"
+                />
                 <h3 className="text-xl tracking-tight">
-                  Pay supplier invoices
+                  Best Time to Visit
                 </h3>
                 <p className="text-muted-foreground text-base">
-                  Our goal is to streamline SMB trade, making it easier and
-                  faster than ever.
+                Learn about the best times to visit to avoid long waits.
                 </p>
               </div>
               <div className="flex flex-col gap-2">
-                <div className="bg-muted rounded-md aspect-video mb-2"></div>
+              <Image
+                  src="https://i.postimg.cc/xd0mnQsk/service-5.jpg"
+                  alt="sia"
+                  height="500"
+                  width="500"
+                  className="bg-muted rounded-md aspect-video mb-2 object-cover"
+                />
                 <h3 className="text-xl tracking-tight">
-                  Pay supplier invoices
+                Counter Availability
                 </h3>
                 <p className="text-muted-foreground text-base">
-                  Our goal is to streamline SMB trade, making it easier and
-                  faster than ever.
+                See which counters are free and which are busy.
                 </p>
               </div>
               <div className="flex flex-col gap-2">
-                <div className="bg-muted rounded-md aspect-video mb-2"></div>
+              <Image
+                  src="https://i.postimg.cc/d1fZ2yJd/service-6.jpg"
+                  alt="sia"
+                  height="500"
+                  width="500"
+                  className="bg-muted rounded-md aspect-video mb-2 object-cover"
+                />
                 <h3 className="text-xl tracking-tight">
-                  Pay supplier invoices
+                Chat-Based Enquiry System
                 </h3>
                 <p className="text-muted-foreground text-base">
-                  Our goal is to streamline SMB trade, making it easier and
-                  faster than ever.
+                Get real-time assistance through our chat-based enquiry system.
                 </p>
               </div>
             </div>

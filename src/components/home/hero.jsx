@@ -23,7 +23,7 @@ const Hero = () => {
           </div>
           <div className="flex flex-row gap-4">
             <Button size="lg" className="gap-4 rounded-3xl" variant="outline">
-              Need <PhoneCall className="w-4 h-4" />
+              Need Assistance<PhoneCall className="w-4 h-4" />
             </Button>
             <Button size="lg" className="gap-4 rounded-3xl">
               Get Started <MoveRight className="w-4 h-4" />

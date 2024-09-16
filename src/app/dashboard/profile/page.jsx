@@ -1,6 +1,6 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { KanbanBoard } from '@/components/kanban/kanban-board';
-import NewTaskDialog from '@/components/kanban/new-task-dialog';
+// import { KanbanBoard } from '@/components/kanban/kanban-board';
+// import NewTaskDialog from '@/components/kanban/new-task-dialog';
 import PageContainer from '@/components/layout/page-container';
 import { Heading } from '@/components/ui/heading';
 
@@ -16,9 +16,9 @@ export default function Page() {
         <Breadcrumbs items={breadcrumbItems} />
         <div className="flex items-start justify-between">
           <Heading title="Kanban" description="Manage tasks by dnd" />
-          <NewTaskDialog />
+          {/* <NewTaskDialog /> */}
         </div>
-        <KanbanBoard />
+        {/* <KanbanBoard /> */}
       </div>
     </PageContainer>
   );

@@ -39,22 +39,21 @@ const Header = () => {
                   <div className="mt-1 ml-1">Services</div>
                 </div>
               </Link>
-              <Link href="#">
-                <div className="flex items-center">
-                  <SearchBar />
-                  <div className="mt-1 ml-1">Contracts</div>
-                </div>
-              </Link>
+              <div className="flex items-center">
+                <SearchBar />
+              </div>
             </div>
 
-            <div className="flex flex-col items-center gap-6">
-              <button
-                type="button"
-                className="relative flex w-full text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-800 font-medium rounded-full text-sm px-5 py-2.5 mb-2"
-              >
-                <User size={20} />
-                <div className="ml-2">User </div>
-              </button>
+            <div className="flex items-center gap-6">
+              <div className="flex">
+                <Link href="/sign-in">
+                  <Button className="flex font-medium text-base rounded-full mt-2  px-5 py-2.5 mb-2">
+                    {/* <User size={20} /> */}
+                    <div className=" mt-0">Login</div>
+                  </Button>
+                </Link>
+              </div>
+              <ModeToggle />
             </div>
           </div>
         ) : null}
@@ -78,20 +77,18 @@ const Header = () => {
               <div className="mt-1 ml-1">Services</div>
             </div>
           </Link>
-          <Link href="/#">
-            <div className="flex items-center">
-              <SearchBar />
-            </div>
-          </Link>
+          <div className="flex items-center">
+            <SearchBar />
+          </div>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="hidden lg:flex items-center space-x-2">
           <div>
-          <Link href="/sign-in">
-            <Button className="flex font-medium text-base rounded-full mt-2  px-5 py-2.5 mb-2">
-              {/* <User size={20} /> */}
-              <div className=" mt-0">Login</div>
-            </Button>
-          </Link>
+            <Link href="/sign-in">
+              <Button className="flex font-medium text-base rounded-full mt-2  px-5 py-2.5 mb-2">
+                {/* <User size={20} /> */}
+                <div className=" mt-0">Login</div>
+              </Button>
+            </Link>
           </div>
           <ModeToggle />
         </div>

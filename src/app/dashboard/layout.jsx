@@ -3,7 +3,7 @@ import Sidebar from '@/components/layout/sidebar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 export const metadata = {
-  title: 'Next Shadcn Dashboard Starter',
+  title: 'DakSeva Admin',
   description: 'Basic dashboard with Next.js and Shadcn'
 };
 

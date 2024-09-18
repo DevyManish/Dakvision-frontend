@@ -19,11 +19,11 @@ import {
 } from '@/components/ui/chart';
 
 const chartData = [
-  { browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
-  { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
-  { browser: 'firefox', visitors: 287, fill: 'var(--color-firefox)' },
-  { browser: 'edge', visitors: 173, fill: 'var(--color-edge)' },
-  { browser: 'other', visitors: 190, fill: 'var(--color-other)' }
+  { browser: 'Mails Services', visitors: 2433, fill: 'var(--color-chrome)' },
+  { browser: 'Financial Services', visitors: 2372, fill: 'var(--color-safari)' },
+  { browser: 'Counter Services', visitors: 2128, fill: 'var(--color-other)' },
+  { browser: 'firefox', visitors: 2311, fill: 'var(--color-firefox)' },
+  { browser: 'Other Services', visitors: 1216, fill: 'var(--color-edge)' },
 ];
 
 const chartConfig = {
@@ -60,8 +60,8 @@ export function PieGraph() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Counter Sevices Share</CardTitle>
+        <CardDescription>August - October 2024</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer

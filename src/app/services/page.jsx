@@ -76,12 +76,12 @@ const page = () => {
                   width="500"
                   className="bg-muted rounded-md aspect-video mb-2 object-cover"
                 />
-                <h3 className="text-xl tracking-tight">Best Time to Visit</h3>
+                <h3 className="text-xl tracking-tight">Counter Services</h3>
                 <p className="text-muted-foreground text-base">
-                  Learn about the best times to visit to avoid long waits.
+                  Get counter services at your fingertips.
                 </p>
               </div>
-              <Link href="/services/queue">
+              <Link href="/services/counters">
                 <div className="flex flex-col gap-2">
                   <Image
                     src="https://i.postimg.cc/xd0mnQsk/service-5.jpg"

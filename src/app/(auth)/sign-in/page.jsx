@@ -25,7 +25,7 @@ function page() {
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
+                placeholder="manish@example.com"
                 required
               />
             </div>

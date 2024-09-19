@@ -3,6 +3,7 @@ import React from 'react'
 import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 const Hero = () => {
   return (
@@ -31,9 +32,30 @@ const Hero = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-8">
-          <div className="bg-muted rounded-md aspect-square"></div>
-          <div className="bg-muted rounded-md row-span-2"></div>
-          <div className="bg-muted rounded-md aspect-square"></div>
+          {/* <div className="bg-muted rounded-md aspect-square"></div> */}
+          <Image
+          src="https://utfs.io/f/glvA31ChFgm4Ti3WkENtAkHfucIEgaKpZdT6oliDzYS901Lx"
+          alt="Image"
+          width="1920"
+          height="1080"
+          className="rounded-md aspect-square"
+        />
+          <Image
+          src="https://utfs.io/f/glvA31ChFgm4B1ckPk06aKSPCgdjy5bJEpmN0TIZzOqtX7Yf"
+          alt="Image"
+          width="1920"
+          height="1080"
+          className="rounded-md row-span-2 object-cover h-full"
+        />
+          <Image
+          src="https://i.postimg.cc/gJWJP27h/dakseva-7.jpg"
+          alt="Image"
+          width="1920"
+          height="1080"
+          className="rounded-md aspect-square"
+        />
+          {/* <div className="bg-muted rounded-md row-span-2"></div> */}
+          {/* <div className="bg-muted rounded-md aspect-square"></div> */}
         </div>
       </div>
     </div>

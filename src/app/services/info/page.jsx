@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import axios from 'axios'
 import { Search, MapPin, Info, Mail, Package, Banknote, Shield, CreditCard, Landmark, Check, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
@@ -75,6 +75,17 @@ export default function PostOfficeServices() {
   const [nearbyPostOffices, setNearbyPostOffices] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+
+
+    // Ref for the POS section
+    const posRef = useRef(null);
+
+    // Function to handle navigation to the POS section
+    const navigateToPOS = () => {
+      if (posRef.current) {
+        posRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
 
   const filteredServices = serviceCategories.filter(category =>
     category.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -181,7 +192,7 @@ export default function PostOfficeServices() {
         )}
       </section>
 
-      <section className="mb-12">
+      <div className="mb-12" id='POS' ref={posRef}>
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
@@ -232,7 +243,7 @@ export default function PostOfficeServices() {
             </div>
           </CardContent>
         </Card>
-      </section>
+      </div>
 
       <section>
         <Card>

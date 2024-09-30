@@ -9,6 +9,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Search } from "lucide-react";
+import Link from "next/link";
 
 export function SearchBar() {
   const [open, setOpen] = React.useState(false);
@@ -41,9 +42,9 @@ export function SearchBar() {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">
-            <CommandItem>Calendar</CommandItem>
-            <CommandItem>Search Emoji</CommandItem>
-            <CommandItem>Calculator</CommandItem>
+          <Link href="https://dakseva.vercel.app/services/chat"><CommandItem>Enquiry Bot</CommandItem></Link>
+            <Link href="https://dakseva.vercel.app/services/info#POS"><CommandItem>Search Nearest Post Office</CommandItem></Link>
+            <CommandItem>Interest Calculator</CommandItem>
           </CommandGroup>
         </CommandList>
       </CommandDialog>

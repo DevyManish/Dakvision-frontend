@@ -34,14 +34,14 @@ const Hero = () => {
         <div className="grid grid-cols-2 gap-8">
           {/* <div className="bg-muted rounded-md aspect-square"></div> */}
           <Image
-          src="https://utfs.io/f/glvA31ChFgm4Ti3WkENtAkHfucIEgaKpZdT6oliDzYS901Lx"
+          src="/assets/leh-po.jpg"
           alt="Image"
           width="1920"
           height="1080"
           className="rounded-md aspect-square"
         />
           <Image
-          src="https://utfs.io/f/glvA31ChFgm4B1ckPk06aKSPCgdjy5bJEpmN0TIZzOqtX7Yf"
+          src="/assets/highest-po.jpg"
           alt="Image"
           width="1920"
           height="1080"

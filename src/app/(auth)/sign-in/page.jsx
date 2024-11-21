@@ -60,7 +60,7 @@ function page() {
       </div>
       <div className="hidden lg:block">
         <Image
-          src="https://utfs.io/f/glvA31ChFgm4B1ckPk06aKSPCgdjy5bJEpmN0TIZzOqtX7Yf"
+          src="/assets/po-collage-c.jpg"
           alt="Image"
           width="1920"
           height="1080"

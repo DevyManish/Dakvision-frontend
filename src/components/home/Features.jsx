@@ -79,7 +79,7 @@ export function Features() {
   ];
 
   return (
-    <div className="w-full px-2 lg:py-10">
+    <div className="w-full px-2 md:px-24 lg:py-10">
       <div className="container mx-auto">
         <div className="flex flex-col gap-10">
           <h2 className="text-xl md:text-5xl font-bold tracking-tighter lg:max-w-xl font-regular text-left">

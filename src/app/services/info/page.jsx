@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import Header from '@/components/layout/header'
 
 const serviceCategories = [
   {
@@ -113,7 +114,9 @@ export default function PostOfficeServices() {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <>
+    <Header/>
+    <div className="container mx-auto mt-4 md:mt-7 py-4 px-6 md:px-24 ">
       <h1 className="text-3xl font-bold mb-8">Post Office Services</h1>
 
       <section className="mb-12">
@@ -259,5 +262,6 @@ export default function PostOfficeServices() {
         </Card>
       </section>
     </div>
+    </>
   )
 }

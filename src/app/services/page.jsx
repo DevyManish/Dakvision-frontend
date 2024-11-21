@@ -1,5 +1,4 @@
 "use client";
-import Header from "@/components/header";
 import { Badge } from "@/components/ui/badge";
 import React from "react";
 import Image from "next/image";
@@ -8,8 +7,7 @@ import Link from "next/link";
 const page = () => {
   return (
     <>
-      <Header />
-      <div className="w-full py-20 lg:py-40">
+      <div className="w-full py-20 md:px-28 px-4 lg:py-40">
         <div className="container mx-auto">
           <div className="flex flex-col gap-10">
             <div className="flex gap-4 flex-col items-start">

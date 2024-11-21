@@ -5,6 +5,7 @@ import Hero from "@/components/home/hero";
 import * as React from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { Testimonials } from "@/components/testimonials";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <div className="px-10">
           <CardsCarousel />
           <Features />
+          <Testimonials/>
         </div>
       </div>
       <Footer />

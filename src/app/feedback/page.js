@@ -2,8 +2,19 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import { CalendarIcon, Check, PhoneCall } from "lucide-react";
+import { CalendarIcon, PhoneCall } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from "@/components/ui/dialog";
 import {
   Accordion,
   AccordionContent,
@@ -15,13 +26,52 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 export default function Page() {
-  const [date, setDate] = useState(() => new Date());
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
+  const [branchName, setBranchName] = useState("");
+  const [branchCode, setBranchCode] = useState("");
+  const [feedbackCategory, setFeedbackCategory] = useState("");
+  const [message, setMessage] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const payload = {
+      name,
+      email,
+      mobileNo: contact,
+      branchName,
+      branchCode,
+      feedbackCategory,
+      message,
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/feedback/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      if (response.ok) {
+        setIsDialogOpen(true);  
+      } else {
+        alert("There was an error submitting your feedback.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("There was an error submitting your feedback.");
+    }
+  };
+  
 
   return (
     <div className="w-full py-20 lg:py-30">
@@ -38,9 +88,9 @@ export default function Page() {
                 Any questions? Reach out <PhoneCall className="w-4 h-4" />
               </Button>
             </div>
-            {/* form */}
-            <div className=" border rounded-lg px-6 md:px-8 py-6 mx-auto my-8 md:w-1/3 text-left">
-              <form>
+            {/* Form */}
+            <div className="border rounded-lg px-6 md:px-8 py-6 mx-auto my-8 md:w-1/3 text-left">
+              <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label
                     htmlFor="name"
@@ -54,6 +104,8 @@ export default function Page() {
                     name="name"
                     className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
                     required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
@@ -68,7 +120,8 @@ export default function Page() {
                     id="email"
                     name="email"
                     className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
-                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
@@ -84,86 +137,64 @@ export default function Page() {
                     name="contact"
                     className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
                     required
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
                   <label
-                    htmlFor="brnch-name"
+                    htmlFor="branch-name"
                     className="block text-gray-700 font-medium mb-2"
                   >
                     Branch Name
                   </label>
                   <input
                     type="text"
-                    id="brnch-name"
-                    name="brnch-name"
+                    id="branch-name"
+                    name="branch-name"
                     className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
                     required
+                    value={branchName}
+                    onChange={(e) => setBranchName(e.target.value)}
                   />
                 </div>
                 <div className="mb-4">
                   <label
-                    htmlFor="brnch-no"
+                    htmlFor="branch-no"
                     className="block text-gray-700 font-medium mb-2"
                   >
                     Branch Code
                   </label>
                   <input
                     type="number"
-                    id="brnch-no"
-                    name="brnch-no"
+                    id="branch-no"
+                    name="branch-no"
                     className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
                     required
+                    value={branchCode}
+                    onChange={(e) => setBranchCode(e.target.value)}
                   />
                 </div>
-                <div className="grid w-full py-3 items-center gap-1">
-                  <Label
-                    htmlFor="picture"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Date
-                  </Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-full py-2 justify-start text-left font-normal border-gray-400 p-2 rounded-lg ",
-                          !date && "text-muted-foreground"
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {date ? format(date, "PPP") : <span>Pick a date</span>}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={date}
-                        onSelect={setDate}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-                <div className="mb-4 mt-2">
+                <div className="mb-4">
                   <label
-                    htmlFor="type"
+                    htmlFor="category"
                     className="block text-gray-700 font-medium mb-2"
                   >
                     Complaint Category
                   </label>
                   <select
-                    id="type"
-                    name="type"
+                    id="category"
+                    name="category"
                     className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
                     required
+                    value={feedbackCategory}
+                    onChange={(e) => setFeedbackCategory(e.target.value)}
                   >
                     <option value="">Select category</option>
-                    <option value="cntr">Counter Services</option>
+                    <option value="counter">Counter Services</option>
                     <option value="mail">Mail/Parcel Services</option>
-                    <option value="fin">Financial Services</option>
-                    <option value="digi">Digital Services</option>
+                    <option value="finance">Financial Services</option>
+                    <option value="digital">Digital Services</option>
                     <option value="other">Other</option>
                   </select>
                 </div>
@@ -180,17 +211,39 @@ export default function Page() {
                     name="message"
                     className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
                     rows="5"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                   ></textarea>
                 </div>
 
-                <div className="grid w-full max-w-sm items-center gap-1 py-2 mb-4">
-                  <Label
-                    htmlFor="doc"
-                    className="block text-gray-700 font-medium text-md mb-2"
+                <div className="mb-4 mt-2">
+                  <label
+                    htmlFor="date"
+                    className="block text-gray-700 font-medium mb-2"
                   >
-                    Upload supporting document
-                  </Label>
-                  <Input id="picture" type="file" />
+                    Date
+                  </label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-full py-2 justify-start text-left font-normal border-gray-400 p-2 rounded-lg"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {date ? format(date, "PPP") : <span>Pick a date</span>}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                      <Calendar
+                        mode="single"
+                        selected={date}
+                        onSelect={setDate}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </div>
 
                 <div>
@@ -204,24 +257,36 @@ export default function Page() {
               </form>
             </div>
             <Badge variant="outline">FAQ</Badge>
-          </div>
-          {/* accordion */}
-          <div className=" w-full px-12 md:max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="w-full">
-              {Array.from({ length: 8 }).map((_, index) => (
-                <AccordionItem key={index} value={"index-" + index}>
-                  <AccordionTrigger>
-                    How can I file a complaint?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    You can file a complaint by filling out the online complaint
-                    form available on our website or app. Provide your personal
-                    details, service reference (e.g., parcel tracking number),
-                    and a description of the issue.
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            {/* accordion */}
+            <div className=" w-full px-12 md:max-w-3xl mx-auto">
+              <Accordion type="single" collapsible className="w-full">
+                {Array.from({ length: 8 }).map((_, index) => (
+                  <AccordionItem key={index} value={"index-" + index}>
+                    <AccordionTrigger>
+                      How can I file a complaint?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      You can file a complaint by filling out the online
+                      complaint form available on our website or app. Provide
+                      your personal details, service reference (e.g., parcel
+                      tracking number), and a description of the issue.
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+            {/* dialog */}
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogContent>
+                <DialogTitle>Complaint Successfully Created</DialogTitle>
+                <DialogDescription>
+                  Your complaint has been submitted successfully!
+                </DialogDescription>
+                <DialogClose asChild>
+                  <Button>Close</Button>
+                </DialogClose>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>

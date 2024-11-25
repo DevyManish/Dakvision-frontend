@@ -66,6 +66,7 @@ const page = () => {
                   </p>
                 </div>
               </Link>
+              <Link href="/services/feedback">
               <div className="flex flex-col gap-2">
                 <Image
                   src="https://i.postimg.cc/K87T6j5S/service-4.jpg"
@@ -74,11 +75,12 @@ const page = () => {
                   width="500"
                   className="bg-muted rounded-md aspect-video mb-2 object-cover"
                 />
-                <h3 className="text-xl tracking-tight">Best Time to Visit</h3>
+                <h3 className="text-xl tracking-tight">Complaint System</h3>
                 <p className="text-muted-foreground text-base">
-                  Learn about the best times to visit to avoid long waits.
+                  Resolve your complaints easily through our state of art complaint system. 
                 </p>
               </div>
+              </Link>
               <Link href="/services/queue">
                 <div className="flex flex-col gap-2">
                   <Image

@@ -60,7 +60,7 @@ function Page() {
       const response = await axios.post(
         `http://localhost:8080/api/v1/users/register`,
         {
-          name: data.firstName + data.lastName,
+          name: data.firstName + " " + data.lastName,
           email: data.email,
           password: data.password,
           role: data.role,
@@ -87,7 +87,7 @@ function Page() {
   return (
     <div className="min-h-screen w-full lg:grid lg:grid-cols-2">
       <div className="flex items-center justify-center px-6 py-12 lg:py-0">
-        <div className="mx-auto grid w-[350px] gap-6">
+        <div className="mx-auto grid mt-10 md:mt-16 w-[350px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Sign up</h1>
             <p className="text-balance text-muted-foreground">

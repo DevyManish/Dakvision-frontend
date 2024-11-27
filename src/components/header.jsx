@@ -6,9 +6,12 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./ModeToggle";
 import { SearchBar } from "./SearchBar";
+import { useAuth } from "../context/AuthContext";
+import UserAvatar from "./user-avatar";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -47,10 +50,15 @@ const Header = () => {
             <div className="flex items-center gap-6">
               <div className="flex">
                 <Link href="/sign-in">
-                  <Button className="flex font-medium text-base rounded-full mt-2  px-5 py-2.5 mb-2">
-                    {/* <User size={20} /> */}
-                    <div className=" mt-0">Login</div>
-                  </Button>
+                  {user ? (
+                    <>
+                      <UserAvatar />
+                    </>
+                  ) : (
+                    <Button className="flex font-medium text-base rounded-full mt-2  px-5 py-2.5 mb-2">
+                      <div className=" mt-0">Login</div>
+                    </Button>
+                  )}
                 </Link>
               </div>
               <ModeToggle />
@@ -84,10 +92,16 @@ const Header = () => {
         <div className="hidden lg:flex items-center space-x-2">
           <div>
             <Link href="/sign-in">
-              <Button className="flex font-medium text-base rounded-full mt-2  px-5 py-2.5 mb-2">
-                {/* <User size={20} /> */}
-                <div className=" mt-0">Login</div>
-              </Button>
+              {/* <User size={20} /> */}
+              {user ? (
+                <>
+                  <UserAvatar />
+                </>
+              ) : (
+                <Button className="flex font-medium text-base rounded-full mt-2  px-5 py-2.5 mb-2">
+                  <div className=" mt-0">Login</div>
+                </Button>
+              )}
             </Link>
           </div>
           <ModeToggle />

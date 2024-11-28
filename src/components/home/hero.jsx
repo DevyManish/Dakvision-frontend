@@ -22,7 +22,7 @@ const Hero = () => {
             Navigating post office services shouldn&apos;t be a hassle. Our solution enhances efficiency and convenience, making service management smoother and more intuitive than ever before.
             </p>
           </div>
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-col md:flex-row gap-4">
             <Button size="lg" className="gap-4 rounded-3xl" variant="outline">
               Need Assistance<PhoneCall className="w-4 h-4" />
             </Button>

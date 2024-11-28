@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,28 +7,66 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { Clock } from "lucide-react";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 export default function Page() {
   const [showCounters, setShowCounters] = useState(false);
   const [ticket, setTicket] = useState(false);
   const [name, setName] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
   const [email, setEmail] = useState("");
   const [serviceCategory, setServiceCategory] = useState("");
   const [accNo, setAccNo] = useState("");
   const [branchName, setBranchName] = useState("");
   const [pincode, setPinCode] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false); // Success dialog
+  const [isFail, setIsFail] = useState(false); // Failure dialog
 
-  const handleTicketSubmit = (e) => {
-    e.preventDefault();
-    setTicket(true);
+  let ticketNum;
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const payload = {
+      fullName: name,
+      email,
+      phoneNumber: phoneNo,
+      serviceCategory,
+      accountNumber: accNo,
+      pinCode: pincode,
+      branchName,
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:8080/api/v1/bookTicket/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json(); // assuming the ticketId is in the response data
+        setIsSuccess(true);
+        ticketNum = data.ticketId;
+      } else {
+        setIsFail(true); // Show failure dialog if the response is not ok
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setIsFail(true); // Show failure dialog if there is an error
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setShowCounters(true);
-  };
-
-  let ticketNum = 20;
   let pos = 10;
   let counterNo = 2;
   let estTime = 5;
@@ -37,7 +75,7 @@ export default function Page() {
     <div className="px-20">
       {/* ticket */}
       <div>
-        <div className="py-4 md:py-14  mt-16">
+        <div className="py-4 md:py-14 mt-16">
           <h2 className="text-xl md:px-24 md:text-4xl font-bold tracking-tighter lg:max-w-xl font-regular text-left">
             Virtual Queue Booking
           </h2>
@@ -46,8 +84,10 @@ export default function Page() {
           <div className="flex flex-col px-4 md:px-24 py-4 mb-6">
             <div className="flex justify-end w-full mb-2 space-x-2">
               <Badge className="bg-orange-400">
-                <Clock size={20}/>
-                <p className="pl-3 py-2">Estimated Time:{" "} <span>{estTime} mins</span></p>
+                <Clock size={20} />
+                <p className="pl-3 py-2">
+                  Estimated Time: <span>{estTime} mins</span>
+                </p>
               </Badge>
             </div>
 
@@ -101,7 +141,7 @@ export default function Page() {
           </div>
         )}
         <div className="container mx-auto p-4 md:px-24 space-y-8">
-          <form onSubmit={handleTicketSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
@@ -113,11 +153,20 @@ export default function Page() {
                 />
               </div>
               <div className="space-y-2">
+                <Label htmlFor="email">Phone Number</Label>
+                <Input
+                  id="phnNo"
+                  type="tel"
+                  required
+                  value={phoneNo}
+                  onChange={(e) => setPhoneNo(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
                   type="email"
-                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -155,6 +204,7 @@ export default function Page() {
                   id="pinCode"
                   required
                   value={pincode}
+                  maxlength="6"
                   onChange={(e) => setPinCode(e.target.value)}
                 />
               </div>
@@ -178,7 +228,7 @@ export default function Page() {
       </div>
       {/* status */}
       <div>
-        <div className="py-4 md:py-14  mt-16">
+        <div className="py-4 md:py-14 mt-16">
           <h2 className="text-xl md:px-24 md:text-4xl font-bold tracking-tighter lg:max-w-xl font-regular text-left">
             Queue Status
           </h2>
@@ -240,6 +290,30 @@ export default function Page() {
               ))}
             </div>
           )}
+          {/* Dialogs for success and failure */}
+          <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
+            <DialogContent>
+              <DialogTitle>Ticket Successfully Booked</DialogTitle>
+              <DialogDescription>
+                Your Queue Ticket has been booked successfully!
+              </DialogDescription>
+              <DialogClose asChild>
+                <Button>Close</Button>
+              </DialogClose>
+            </DialogContent>
+          </Dialog>
+
+          <Dialog open={isFail} onOpenChange={setIsFail}>
+            <DialogContent>
+              <DialogTitle>Ticket Booking Failed</DialogTitle>
+              <DialogDescription>
+                There was an issue booking your queue ticket.
+              </DialogDescription>
+              <DialogClose asChild>
+                <Button>Close</Button>
+              </DialogClose>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>

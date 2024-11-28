@@ -35,7 +35,7 @@ export default function Page() {
   const [contact, setContact] = useState("");
   const [branchName, setBranchName] = useState("");
   const [branchCode, setBranchCode] = useState("");
-  const [feedbackCategory, setFeedbackCategory] = useState("");
+  const [complaintCategory, setComplaintCategory] = useState("");
   const [message, setMessage] = useState("");
   const [date, setDate] = useState(new Date());
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -48,7 +48,7 @@ export default function Page() {
       mobileNo: contact,
       branchName,
       branchCode,
-      feedbackCategory,
+      complaintCategory,
       message,
     };
 
@@ -187,8 +187,8 @@ export default function Page() {
                     name="category"
                     className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
                     required
-                    value={feedbackCategory}
-                    onChange={(e) => setFeedbackCategory(e.target.value)}
+                    value={complaintCategory}
+                    onChange={(e) => setComplaintCategory(e.target.value)}
                   >
                     <option value="">Select category</option>
                     <option value="counter">Counter Services</option>

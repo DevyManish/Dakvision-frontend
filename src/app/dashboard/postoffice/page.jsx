@@ -6,8 +6,6 @@ import { CalendarDateRangePicker } from '@/components/date-range-picker';
 import PageContainer from '@/components/layout/page-container';
 import { RecentSales } from '@/components/recent-sales';
 import { Button } from '@/components/ui/button';
-import Sidebar from '@/components/layout/sidebar';
-import Header from '@/components/layout/header';
 import {
   Card,
   CardContent,
@@ -18,16 +16,13 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {IndianRupee } from "lucide-react";
 
-export default function Page() {
-  return (    <div className="flex">
-    <Sidebar />
-    <main className="w-full flex-1 overflow-hidden">
-      <Header />
+export default function PostOfficePage() {
+  return (
     <PageContainer scrollable={true}>
-      <div className="space-y-2">
+      <div className="space-y-2 mt-16">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-2xl font-bold tracking-tight">
-          National Service Dashboard
+          Post Office Inner Dashboard
           </h2>
           <div className="hidden items-center space-x-2 md:flex">
             <CalendarDateRangePicker />
@@ -160,7 +155,5 @@ export default function Page() {
         </Tabs>
       </div>
     </PageContainer>
-    </main>
-    </div>
   );
 }

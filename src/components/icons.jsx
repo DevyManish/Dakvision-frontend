@@ -26,8 +26,17 @@ import {
     Twitter,
     User,
     User2Icon,
-    UserX2Icon
+    UserX2Icon,
+    Landmark
   } from 'lucide-react';
+
+  
+import { GrDocumentPerformance } from "react-icons/gr";
+import { MdOutlineFeedback } from "react-icons/md";
+import { IoTicketOutline } from "react-icons/io5";
+import { GiPostOffice } from "react-icons/gi";
+import { GoPeople } from "react-icons/go";
+
   
   export const Icons = {
     dashboard: LayoutDashboardIcon,
@@ -37,6 +46,11 @@ import {
     profile: User2Icon,
     spinner: Loader2,
     kanban: CircuitBoardIcon,
+    performance: GrDocumentPerformance,
+    feedbackIcon: MdOutlineFeedback,
+    queueIcon: GoPeople,
+    ticket: IoTicketOutline,
+    po: Landmark,
     chevronLeft: ChevronLeft,
     chevronRight: ChevronRight,
     trash: Trash,

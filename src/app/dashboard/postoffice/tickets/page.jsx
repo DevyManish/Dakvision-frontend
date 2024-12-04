@@ -15,7 +15,7 @@ export default function QueueTicketsPage() {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/bookTicket/view/743135")
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/bookTicket/view/743135`)
         setTickets(response.data.data)
         setLoading(false)
       } catch (err) {

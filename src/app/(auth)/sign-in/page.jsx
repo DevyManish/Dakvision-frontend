@@ -47,7 +47,7 @@ function Page() {
     setLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/v1/users/login`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}Lapi/v1/users/login`,
         {
           email: data.email,
           password: data.password,

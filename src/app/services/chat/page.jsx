@@ -181,7 +181,7 @@ export default function Page() {
                     onClick={() => handleAttachment("image")}
                     className="flex flex-col items-center p-4"
                     >
-                    <Image className="h-8 w-8 mb-2" />
+                    <Image className="h-8 w-8 mb-2" alt="image"/>
                     Image
                     </Button>
                     <Button

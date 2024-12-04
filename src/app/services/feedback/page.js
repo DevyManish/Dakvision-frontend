@@ -53,7 +53,7 @@ export default function Page() {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/api/v1/feedback/create", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/feedback/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

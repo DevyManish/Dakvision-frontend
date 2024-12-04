@@ -45,7 +45,7 @@ export default function EmployeeDashboard() {
   const fetchEmployees = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/v1/employee/view/743135"
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/employee/view/743135`
       );
       setEmployees(response.data.data);
       setLoading(false);
@@ -70,7 +70,7 @@ export default function EmployeeDashboard() {
 
     try {
       await axios.post(
-        "http://localhost:8080/api/v1/employee/create",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/employee/create`,
         newEmployee
       );
       fetchEmployees(); // Refresh the employee list
@@ -105,7 +105,7 @@ export default function EmployeeDashboard() {
 
     try {
       await axios.put(
-        "http://localhost:8080/api/v1/employee/edit",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/employee/edit`,
         updatedEmployee
       );
       fetchEmployees(); // Refresh the employee list
@@ -125,7 +125,7 @@ export default function EmployeeDashboard() {
   const handleDeleteEmployee = async (empId) => {
     try {
       await axios.delete(
-        `http://localhost:8080/api/v1/employee/delete/${empId}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/employee/delete/${empId}`
       );
       setEmployees(employees.filter((emp) => emp.empId !== empId));
       toast({

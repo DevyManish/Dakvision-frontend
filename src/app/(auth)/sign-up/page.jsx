@@ -58,7 +58,7 @@ function Page() {
     setLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/v1/users/register`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/users/register`,
         {
           name: data.firstName + " " + data.lastName,
           email: data.email,

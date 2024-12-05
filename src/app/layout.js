@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from '../context/AuthContext';
 
@@ -45,6 +46,7 @@ export default function RootLayout({ children }) {
             <Header />
             <main>{children}</main>
             <Toaster />
+            <Footer />
           </ThemeProvider>
         </AuthProvider>
       </body>

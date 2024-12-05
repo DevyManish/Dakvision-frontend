@@ -1,7 +1,26 @@
 "use client";
 import React from "react";
+import { cn } from "@/lib/utils"
 
 const Footer = () => {
+  const [serverStatus, setServerStatus] = React.useState('unknown')
+
+  const checkServerStatus = React.useCallback(async () => {
+    try {
+      const response = await fetch('https://dakvision-backend.onrender.com/api/v1/healthcheck')
+      const data = await response.json()
+      setServerStatus(data.data.serverStatus === 'online' ? 'online' : 'offline')
+    } catch (error) {
+      setServerStatus('offline')
+    }
+  }, [])
+
+  React.useEffect(() => {
+    checkServerStatus()
+    const interval = setInterval(checkServerStatus, 5 * 60 * 1000) // Check every 5 minutes
+    return () => clearInterval(interval)
+  }, [checkServerStatus])
+
   return (
     <footer className="body-font bottom-0">
       <div className="container px-5 py-4 mx-auto flex items-center sm:flex-row flex-col">
@@ -20,6 +39,19 @@ const Footer = () => {
           </a>
         </p>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+        <div className="flex items-center gap-2 px-4">
+            <div 
+              className={cn(
+                "w-2 h-2 rounded-full",
+                serverStatus === 'online' ? "bg-green-500" : 
+                serverStatus === 'offline' ? "bg-red-500" : 
+                "bg-gray-500"
+              )}
+            />
+            <span className="text-sm">
+              Server: {serverStatus === 'online' ? 'Online' : serverStatus === 'offline' ? 'Offline' : 'Checking...'}
+            </span>
+          </div>
           <a className="">
             <svg
               fill="currentColor"

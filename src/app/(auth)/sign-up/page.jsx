@@ -72,7 +72,7 @@ function Page() {
           withCredentials: true,
         }
       );
-      router.push("/login");
+      router.push("/sign-in");
       setLoading(false);
     } catch (error) {
       console.error(error);

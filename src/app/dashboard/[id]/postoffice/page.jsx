@@ -1,28 +1,29 @@
-"use client"
-import { AreaGraph } from '@/components/charts/area-graph';
-import { BarGraph } from '@/components/charts/bar-graph';
-import { PieGraph } from '@/components/charts/pie-graph';
-import { CalendarDateRangePicker } from '@/components/date-range-picker';
-import PageContainer from '@/components/layout/page-container';
-import { RecentSales } from '@/components/recent-sales';
-import { Button } from '@/components/ui/button';
+"use client";
+import { AreaGraph } from "@/components/charts/area-graph";
+import { BarGraph } from "@/components/charts/bar-graph";
+import { PieGraph } from "@/components/charts/pie-graph";
+import { CalendarDateRangePicker } from "@/components/date-range-picker";
+import PageContainer from "@/components/layout/page-container";
+import protectedRoute from "@/components/protectedRoute";
+import { RecentSales } from "@/components/recent-sales";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
-} from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {IndianRupee } from "lucide-react";
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { IndianRupee } from "lucide-react";
 
-export default function PostOfficePage() {
+const PostOfficePage = () => {
   return (
     <PageContainer scrollable={true}>
       <div className="space-y-2 mt-16">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-2xl font-bold tracking-tight">
-          Post Office Inner Dashboard
+            Post Office Inner Dashboard
           </h2>
           <div className="hidden items-center space-x-2 md:flex">
             <CalendarDateRangePicker />
@@ -41,9 +42,9 @@ export default function PostOfficePage() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                  Total Transactions
+                    Total Transactions
                   </CardTitle>
-                  <IndianRupee size={15} color='#AAA5A2'/>
+                  <IndianRupee size={15} color="#AAA5A2" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">₹199,708.23</div>
@@ -81,7 +82,9 @@ export default function PostOfficePage() {
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Waiting Time Reduced</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Waiting Time Reduced
+                  </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -106,7 +109,7 @@ export default function PostOfficePage() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                  Current Queue Status
+                    Current Queue Status
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -156,4 +159,6 @@ export default function PostOfficePage() {
       </div>
     </PageContainer>
   );
-}
+};
+
+export default protectedRoute("branch_manager", PostOfficePage);

@@ -17,9 +17,10 @@ import {
   IndianRupee,
   Package,
 } from "lucide-react";
+import { useAuthStore } from "@/store/authStore";
 
 const UserAvatar = () => {
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuthStore();
 
   const nameShorter = (name) => {
     const namePart = name.split(" ");
@@ -28,14 +29,14 @@ const UserAvatar = () => {
     return firstChar + lastChar;
   };
 
-  const shortName = user?.name ? nameShorter(user.name) : "";
+  const shortName = user?.name ? nameShorter(user.name) : "sss";
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger>
           {" "}
           <Avatar className="h-9 w-9 border-2 ">
-            <AvatarImage src="/avatars/01.png" alt="Avatar" />
+            <AvatarImage src={`${user.profileImage}`} alt="Avatar" />
             <AvatarFallback>{shortName}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>

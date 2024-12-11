@@ -10,12 +10,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from "../../../context/AuthContext";
+import { useAuthStore } from "@/store/authStore";
 
 export const description =
   "A login page with two columns. The first column has the login form with email and password. There's a Forgot your password link and a link to sign up if you do not have an account. The second column has a cover image.";
@@ -29,7 +29,7 @@ const loginSchema = z.object({
 });
 
 function Page() {
-  const { login } = useAuth();
+  // const { login } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -43,36 +43,33 @@ function Page() {
     mode: "onChange",
   });
 
+  const {
+    login,
+    // user,
+    loading: authLoading,
+    error: authError,
+  } = useAuthStore();
+
   const onSubmit = async (data) => {
-    setLoading(true);
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/users/login`,
-        {
-          email: data.email,
-          password: data.password,
-        },
-        {
-          withCredentials: true,
-        }
-      );
-
-      login(response.data.data.user); 
-
+      await login({ email: data.email, password: data.password });
+      const user = useAuthStore.getState().user;
       toast({
-        title: `Welcome ${response.data.data.user.name.split(" ")[0]}`,
+        title: `Welcome ${user.name.split(" ")[0]}`,
       });
       setTimeout(() => {
-        router.push("/dashboard");
+        if (user.role === "admin") {
+          router.push("/admin/dashboard");
+        } else if (user.role === "branch_manager") {
+          router.push(`/dashboard/${user.branchName}/postoffice`);
+        }
       }, 3000);
-      setLoading(false);
     } catch (error) {
       console.error(error);
       toast({
-        title: error.response?.data?.message || "Login failed",
         variant: "destructive",
+        title: authError,
       });
-      setLoading(false);
     }
   };
 
@@ -122,7 +119,7 @@ function Page() {
             <Button
               type="submit"
               className="w-full"
-              disabled={loading || !isValid}
+              disabled={authLoading || !isValid}
             >
               {loading && <Loader2 className="animate-spin" />} Login
             </Button>

@@ -47,17 +47,14 @@ export default function FeedbackForm() {
     name: "questions",
   });
 
-  // Handle adding a question
   const handleAddQuestion = () => {
     append("");
   };
 
-  // Handle removing a question
   const handleRemoveQuestion = (index) => {
     remove(index);
   };
 
-  // Form submission handler
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
@@ -81,7 +78,7 @@ export default function FeedbackForm() {
       setQrCode(response.data.data.qrCode);
       setFeedbackLink(response.data.data.link);
       setShowPopover(true);
-      reset(); // Reset form after successful submission
+      reset(); 
     } catch (error) {
       console.error("Error creating feedback:", error);
       toast({
@@ -102,7 +99,6 @@ export default function FeedbackForm() {
           <CardTitle>Create Feedback Form</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* Title Input */}
           <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
             <Controller
@@ -118,7 +114,6 @@ export default function FeedbackForm() {
             />
           </div>
 
-          {/* Questions */}
           {fields.map((item, index) => (
             <div key={item.id} className="space-y-2">
               <div className="flex items-center space-x-2">

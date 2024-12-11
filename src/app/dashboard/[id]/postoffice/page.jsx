@@ -31,6 +31,13 @@ const PostOfficePage = () => {
     },
   });
 
+
+  
+
+  useEffect(() => {
+    metrics.status === "overcrowded" ? alert("Queue is overcrowded") : null;
+  });
+
   const printRef = useRef(null);
 
   const handlePrint = useReactToPrint({

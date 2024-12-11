@@ -33,7 +33,6 @@ export default function FeedbackResponseForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic form validation
     if (!name || !email || !mobile) {
       toast({
         title: "Error",
@@ -52,13 +51,11 @@ export default function FeedbackResponseForm() {
       return;
     }
 
-    // Transform ratings object into the required answers array format
     const answers = Object.entries(ratings).map(([questionId, score]) => ({
       questionId,
       score,
     }));
 
-    // Prepare form data
     const formData = {
       name,
       email,
@@ -151,22 +148,6 @@ export default function FeedbackResponseForm() {
             questions.map((question) => (
               <div key={question.id} className="space-y-2">
                 <Label>{question.questionText}</Label>
-                {/* <Select
-                  onValueChange={(value) =>
-                    handleRatingChange(question.id, value)
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a rating" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((rating) => (
-                      <SelectItem key={rating} value={rating.toString()}>
-                        {rating}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select> */}
                 <RadioGroup
                   onValueChange={(value) =>
                     handleRatingChange(question.id, value)

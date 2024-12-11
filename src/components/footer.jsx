@@ -7,7 +7,7 @@ const Footer = () => {
 
   const checkServerStatus = React.useCallback(async () => {
     try {
-      const response = await fetch('https://dakvision-backend.onrender.com/api/v1/healthcheck')
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/healthcheck`)
       const data = await response.json()
       setServerStatus(data.data.serverStatus === 'online' ? 'online' : 'offline')
     } catch (error) {

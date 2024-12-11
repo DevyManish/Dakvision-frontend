@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, X, House, Store, Search, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,10 +8,15 @@ import { ModeToggle } from "./ModeToggle";
 import { SearchBar } from "./SearchBar";
 import { useAuth } from "../context/AuthContext";
 import UserAvatar from "./user-avatar";
+import { useAuthStore } from "@/store/authStore";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, logout, fetchUser } = useAuthStore();
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);

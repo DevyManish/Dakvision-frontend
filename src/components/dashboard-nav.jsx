@@ -14,7 +14,6 @@ import {
 
 export function DashboardNav({ items, setOpen, isMobileNav = false }) {
   const path = usePathname();
-  // Local state for managing minimized state
   const [isMinimized, setIsMinimized] = useState(false);
 
   if (!items?.length) {

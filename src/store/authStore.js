@@ -4,7 +4,8 @@ import { create } from "zustand";
 export const useAuthStore = create((set) => ({
     user: null,
     loading: false,
-    isAuthenticated: localStorage.getItem("token") ? true : false,
+    isAuthenticated:
+        typeof window !== "undefined" && localStorage.getItem("token") ? true : false,
     error: null,
 
     setUser: (user) => set({ user }),

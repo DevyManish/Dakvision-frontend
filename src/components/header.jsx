@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Menu, X, House, Store, Search, User } from "lucide-react";
+import { Menu, X, HomeIcon as House, Store, Search, User, Globe } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -9,6 +9,8 @@ import { SearchBar } from "./SearchBar";
 import { useAuth } from "../context/AuthContext";
 import UserAvatar from "./user-avatar";
 import { useAuthStore } from "@/store/authStore";
+import GoogleTranslate from "@/components/Translate";
+import { LanguageSwitcher } from "@/components/lang-switcher";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,6 +55,7 @@ const Header = () => {
             </div>
 
             <div className="flex items-center gap-6">
+            
               <div className="flex">
                 <Link href="/sign-in">
                   {user ? (
@@ -93,8 +96,13 @@ const Header = () => {
           <div className="flex items-center">
             <SearchBar />
           </div>
+          <div className="flex items-center">
+            {/*<GoogleTranslate />*/}
+            <LanguageSwitcher />
+          </div>
         </div>
         <div className="hidden lg:flex items-center space-x-2">
+        
           <div>
             <Link href="/sign-in">
               {/* <User size={20} /> */}

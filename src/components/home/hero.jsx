@@ -4,6 +4,7 @@ import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import GoogleTranslate from '../Translate';
 
 const Hero = () => {
   return (

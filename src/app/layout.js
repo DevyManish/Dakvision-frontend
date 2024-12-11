@@ -4,7 +4,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/toaster";
-import { AuthProvider } from '../context/AuthContext';
+import { AuthProvider } from "../context/AuthContext";
+import Script from "next/script";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,6 +32,18 @@ export default function RootLayout({ children }) {
           href="/favicon.ico"
           type="image/x-icon"
           sizes="16x16"
+        />
+        <Script
+          src="/assets/scripts/lang-config.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          src="/assets/scripts/translation.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          src="//translate.google.com/translate_a/element.js?cb=TranslateInit"
+          strategy="afterInteractive"
         />
       </head>
       <body

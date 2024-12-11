@@ -69,3 +69,13 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+#google_translate_element .goog-te-banner-frame {
+  display: none !important;
+}
+
+#google_translate_element .goog-te-combo {
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+}

@@ -66,7 +66,7 @@ const page = () => {
                   </p>
                 </div>
               </Link>
-              <Link href="/services/feedback">
+              <Link href="/services/complaint">
               <div className="flex flex-col gap-2">
                 <Image
                   src="https://i.postimg.cc/K87T6j5S/service-4.jpg"

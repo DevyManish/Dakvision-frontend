@@ -17,7 +17,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { IndianRupee, Users, Clock, Printer } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
-import { useReactToPrint } from "react-to-print";
+
 
 const PostOfficePage = () => {
   const [metrics, setMetrics] = useState({
@@ -39,22 +39,23 @@ const PostOfficePage = () => {
   });
 
   const printRef = useRef(null);
+  const handlePrint=()=>{}
 
-  const handlePrint = useReactToPrint({
-    content: () => printRef.current,
-    documentTitle: "Post Office Dashboard Report",
-    pageStyle: `
-      @page { 
-        size: A4 landscape; 
-        margin: 10mm; 
-      }
-      @media print {
-        body { 
-          -webkit-print-color-adjust: exact; 
-        }
-      }
-    `,
-  });
+  // const handlePrint = useReactToPrint({
+  //   content: () => printRef.current,
+  //   documentTitle: "Post Office Dashboard Report",
+  //   pageStyle: `
+  //     @page { 
+  //       size: A4 landscape; 
+  //       margin: 10mm; 
+  //     }
+  //     @media print {
+  //       body { 
+  //         -webkit-print-color-adjust: exact; 
+  //       }
+  //     }
+  //   `,
+  // });
 
   useEffect(() => {
     const updateMetrics = () => {

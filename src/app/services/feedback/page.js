@@ -1,295 +1,181 @@
 "use client";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { CalendarIcon, PhoneCall } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
-} from "@/components/ui/dialog";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useToast } from "@/hooks/use-toast";
+import api from "@/lib/api";
+import { useParams } from "next/navigation";
 
-export default function Page() {
-
+export default function FeedbackResponseForm() {
+  const { formid } = useParams();
+  const { toast } = useToast();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [contact, setContact] = useState("");
-  const [branchName, setBranchName] = useState("");
-  const [branchCode, setBranchCode] = useState("");
-  const [complaintCategory, setComplaintCategory] = useState("");
-  const [message, setMessage] = useState("");
-  const [date, setDate] = useState(new Date());
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [mobile, setMobile] = useState("");
+  const [ratings, setRatings] = useState({});
+  const [title, setTitle] = useState("");
+  const [questions, setQuestions] = useState([]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const payload = {
+  const handleRatingChange = (questionId, rating) => {
+    setRatings((prev) => ({ ...prev, [questionId]: parseInt(rating) }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!name || !email || !mobile) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (Object.keys(ratings).length !== questions.length) {
+      toast({
+        title: "Error",
+        description: "Please rate all questions",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const answers = Object.entries(ratings).map(([questionId, score]) => ({
+      questionId,
+      score,
+    }));
+
+    const formData = {
       name,
       email,
-      mobileNo: contact,
-      branchName,
-      branchCode,
-      complaintCategory,
-      message,
+      mobileNo: mobile,
+      answers,
     };
 
+    console.log("Submitting form data:", formData);
+
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/v1/feedback/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+      const response = await api.post(`/feedback/${formid}/submit`, formData);
+      console.log("API Response:", response.data);
+
+      toast({
+        title: "Success",
+        description: "Your feedback has been submitted successfully!",
       });
-  
-      if (response.ok) {
-        setIsDialogOpen(true);  
-      } else {
-        alert("There was an error submitting your feedback.");
-      }
     } catch (error) {
-      console.error("Error:", error);
-      alert("There was an error submitting your feedback.");
+      console.error("Error submitting feedback:", error);
+      toast({
+        title: "Error",
+        description: "Failed to submit feedback. Please try again.",
+        variant: "destructive",
+      });
     }
   };
-  
+
+  useEffect(() => {
+    const fetchFeedbackForm = async () => {
+      try {
+        const response = await api.get(`/feedback/${formid}/questions`);
+        const formData = response.data.data;
+
+        console.log("Form Data:", formData);
+        setTitle(formData.title);
+        setQuestions(formData.questions);
+      } catch (error) {
+        console.error("Error fetching feedback form:", error);
+        toast({
+          title: "Error",
+          description: "Failed to fetch feedback form. Please try again.",
+          variant: "destructive",
+        });
+      }
+    };
+
+    fetchFeedbackForm();
+  }, [formid, toast]);
 
   return (
-    <div className="w-full py-20 lg:py-30">
-      <div className="container mx-auto">
-        <div className="flex flex-col gap-10">
-          <div className="flex text-center justify-center items-center gap-4 flex-col">
-            <div className="flex gap-2 flex-col">
-              <h4 className="text-3xl md:text-5xl tracking-tighter max-w-xl text-center font-regular">
-                Complaint Service
-              </h4>
-            </div>
-            <div>
-              <Button className="gap-4" variant="outline">
-                Any questions? Reach out <PhoneCall className="w-4 h-4" />
-              </Button>
-            </div>
-            {/* Form */}
-            <div className="border rounded-lg px-6 md:px-8 py-6 mx-auto my-8 md:w-1/3 text-left">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <label
-                    htmlFor="name"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="email"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Email (Optional)
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="contact-no"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Contact Number
-                  </label>
-                  <input
-                    type="number"
-                    id="contact"
-                    name="contact"
-                    className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
-                    required
-                    value={contact}
-                    onChange={(e) => setContact(e.target.value)}
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="branch-name"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Branch Name
-                  </label>
-                  <input
-                    type="text"
-                    id="branch-name"
-                    name="branch-name"
-                    className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
-                    required
-                    value={branchName}
-                    onChange={(e) => setBranchName(e.target.value)}
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="branch-no"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Branch Code
-                  </label>
-                  <input
-                    type="number"
-                    id="branch-no"
-                    name="branch-no"
-                    className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
-                    required
-                    value={branchCode}
-                    onChange={(e) => setBranchCode(e.target.value)}
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="category"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Complaint Category
-                  </label>
-                  <select
-                    id="category"
-                    name="category"
-                    className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
-                    required
-                    value={complaintCategory}
-                    onChange={(e) => setComplaintCategory(e.target.value)}
-                  >
-                    <option value="">Select category</option>
-                    <option value="counter">Counter Services</option>
-                    <option value="mail">Mail/Parcel Services</option>
-                    <option value="finance">Financial Services</option>
-                    <option value="digital">Digital Services</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div className="mb-2">
-                  <label
-                    htmlFor="message"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Complaint Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    className="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-orange-400"
-                    rows="5"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                  ></textarea>
-                </div>
-
-                <div className="mb-4 mt-2">
-                  <label
-                    htmlFor="date"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Date
-                  </label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-full py-2 justify-start text-left font-normal border-gray-400 p-2 rounded-lg"
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {date ? format(date, "PPP") : <span>Pick a date</span>}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={date}
-                        onSelect={setDate}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-
-                <div>
-                  <button
-                    type="submit"
-                    className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-            <Badge variant="outline">FAQ</Badge>
-            {/* accordion */}
-            <div className=" w-full px-12 md:max-w-3xl mx-auto">
-              <Accordion type="single" collapsible className="w-full">
-                {Array.from({ length: 8 }).map((_, index) => (
-                  <AccordionItem key={index} value={"index-" + index}>
-                    <AccordionTrigger>
-                      How can I file a complaint?
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      You can file a complaint by filling out the online
-                      complaint form available on our website or app. Provide
-                      your personal details, service reference (e.g., parcel
-                      tracking number), and a description of the issue.
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-            {/* dialog */}
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-              <DialogContent>
-                <DialogTitle>Complaint Successfully Created</DialogTitle>
-                <DialogDescription>
-                  Your complaint has been submitted successfully!
-                </DialogDescription>
-                <DialogClose asChild>
-                  <Button>Close</Button>
-                </DialogClose>
-              </DialogContent>
-            </Dialog>
+    <Card className="w-full max-w-2xl mx-auto mt-16 mb-10">
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+      </CardHeader>
+      <form onSubmit={handleSubmit}>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter your name"
+              required
+            />
           </div>
-        </div>
-      </div>
-    </div>
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="mobile">Mobile Number</Label>
+            <Input
+              id="mobile"
+              type="tel"
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
+              placeholder="Enter your mobile number"
+              required
+            />
+          </div>
+          {questions.length > 0 ? (
+            questions.map((question) => (
+              <div key={question.id} className="space-y-2">
+                <Label>{question.questionText}</Label>
+                <RadioGroup
+                  onValueChange={(value) =>
+                    handleRatingChange(question.id, value)
+                  }
+                  className="flex gap-4 mt-2 justify-center"
+                >
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
+                    <div key={value} className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value={value.toString()}
+                        id={`q1-${value}`}
+                      />
+                      <Label htmlFor={`q1-${value}`}>{value}</Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </div>
+            ))
+          ) : (
+            <p>No questions available.</p>
+          )}
+        </CardContent>
+        <CardFooter>
+          <Button type="submit" className="w-full">
+            Submit Feedback
+          </Button>
+        </CardFooter>
+      </form>
+    </Card>
   );
 }

@@ -1,30 +1,28 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import api from '@/lib/api'
-
+import Link from "next/link";
 export default function FeedbackManagementPage() {
   const [feedbacks, setFeedbacks] = useState([])
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
-        const response = await api.get('http://localhost:8090/api/v1/feedback/all?branchCode=743136')
+        const response = await api.get('/feedback/all?branchCode=743136')
 
-          // Transform the data to match our desired structure
           const transformedData = response.data.data.feedbacks.map((item) => ({
             id: item.id,
             title: `Feedback from ${item.name}`,
-            qrcode: 'N/A', // QR code is not provided in the API response
+            qrcode: 'N/A', 
             createdAt: new Date(item.createdAt).toLocaleString(),
             userId: item.email,
-            branchCode: '743136', // Using the branch code from the API URL
+            branchCode: '743136',
           }))
           setFeedbacks(transformedData)
-      } catch (error) {At
+      } catch (error) {
         console.error('Error fetching feedbacks:', error)
       }
     }
@@ -34,7 +32,12 @@ export default function FeedbackManagementPage() {
 
   return (
     <div className="container mx-auto py-10 mt-16">
+    <div className='flex justify-between'>
       <h1 className="text-2xl font-bold mb-5">Feedback Management</h1>
+      <Link href="feedbacks/create">
+      <Button>Create </Button>
+      </Link>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { PlusCircle, MinusCircle } from 'lucide-react'
+import Link from "next/link"
 
 const initialCounters = [
   { id: 1, queueLength: 5, jobTime: "10 min", avgWaitingTime: "15 min" },
@@ -44,6 +45,14 @@ export default function QueueAnalysisDashboard() {
         <Button onClick={removeCounter} variant="outline">
           <MinusCircle className="mr-2 h-4 w-4" />
           Remove Counter
+        </Button>
+
+        <Button variant="outline">
+
+        <Link href={"queue/analyze"}>
+          <MinusCircle className="mr-2 h-4 w-4" />
+          Analyze Queue
+        </Link>
         </Button>
       </div>
       

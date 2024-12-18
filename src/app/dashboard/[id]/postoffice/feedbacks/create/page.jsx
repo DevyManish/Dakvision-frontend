@@ -29,7 +29,6 @@ export default function FeedbackForm() {
   const [showPopover, setShowPopover] = useState(false);
   const [feedbackLink, setFeedbackLink] = useState("");
 
-  // Initialize react-hook-form
   const {
     control,
     handleSubmit,
@@ -74,7 +73,7 @@ export default function FeedbackForm() {
       toast({
         title: "Feedback created successfully!",
       });
-
+  console.log(response.data.data)
       setQrCode(response.data.data.qrCode);
       setFeedbackLink(response.data.data.link);
       setShowPopover(true);
